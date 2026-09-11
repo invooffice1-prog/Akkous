@@ -4,7 +4,7 @@
 export function initReveal() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReduced) {
-    document.querySelectorAll(".reveal, .pipeline-mini").forEach((el) => {
+    document.querySelectorAll(".reveal, .pipeline-mini, .eco").forEach((el) => {
       el.classList.add("in");
     });
     return;

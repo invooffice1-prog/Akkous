@@ -7,6 +7,9 @@ import { t } from "./i18n.js";
 let modal, backdrop, closeBtn, form, submitBtn, successEl, headerEl, charCounter;
 let lastFocused = null;
 
+/** Abort the form fetch after this long (prevents an endless loading state). */
+const FETCH_TIMEOUT_MS = 15000;
+
 /* ---------- DOM References ---------- */
 
 function cacheDom() {
@@ -117,11 +120,15 @@ async function handleSubmit(e) {
     projectDescription: form.projectDescription.value.trim(),
   };
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+
   try {
     const response = await fetch(GOOGLE_SCRIPT_API_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=UTF-8" },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     });
 
     const result = await response.json();
@@ -133,6 +140,8 @@ async function handleSubmit(e) {
     }
   } catch {
     setSubmitError(t("form.err.sendFailed"));
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -154,6 +163,8 @@ function showSuccess() {
   form.classList.add("hidden");
   headerEl.classList.add("hidden");
   successEl.classList.add("show");
+  successEl.setAttribute("tabindex", "-1");
+  successEl.focus();
 }
 
 /* ---------- Focus Trap ---------- */

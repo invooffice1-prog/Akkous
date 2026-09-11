@@ -20,19 +20,42 @@
 /* ---- CONFIGURATION ---- */
 
 // Your Google Spreadsheet ID (from the URL: docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit)
-const SPREADSHEET_ID = "VOTRE_SPREADSHEET_ID";
+const SPREADSHEET_ID = "1juhgZytxV8Ih4zGiqnLcU3RRctECkf9NT0tfx_nTZdw";
 
 // Sheet tab name
-const SHEET_NAME = "Project Requests";
+const SHEET_NAME = "systems";
 
 // Admin email for notifications
-const ADMIN_EMAIL = "MON_EMAIL@gmail.com";
+const ADMIN_EMAIL = "onouari@invooffice.com";
 
 // Agency name used in client confirmation email
 const AGENCY_NAME = "AKKOUS";
 
 // Max description length (must match frontend config)
 const MAX_DESCRIPTION_LENGTH = 5000;
+
+
+/* ---- ANTI-ABUSE CONFIGURATION ---- */
+
+// Origin allow-list (defense in depth — see isTrustedSource()).
+// Apps Script Web Apps do NOT reliably expose the Origin/Referer HTTP
+// headers to doGet/doPost, so this is an OPT-IN guard: it only rejects
+// requests that carry an explicit origin hint failing this list, and it
+// NEVER blocks requests with no hint. The frontend sends no hint today.
+const ALLOWED_ORIGINS = [
+  "https://www.akkous.com",
+  "https://www.akkous.com/"
+];
+
+// Global rate limit. Apps Script provides no reliable client IP for an
+// "Anyone" Web App, so the throttle is a GLOBAL fixed-window counter kept
+// in script properties (timestamps only — no personal data stored).
+// Window: THROTTLE_WINDOW_SECONDS (120 s). Budget: THROTTLE_MAX_PER_WINDOW
+// (3 accepted submissions — enough for a couple of simultaneous humans).
+// Fail-open: if script properties are unavailable, requests are NOT blocked.
+const THROTTLE_WINDOW_SECONDS = 120;
+const THROTTLE_MAX_PER_WINDOW = 3;
+const THROTTLE_PROP_KEY = "akkous_throttle";
 
 
 /* ---- DO GET (required for Web App deployment) ---- */
@@ -55,6 +78,18 @@ function doPost(e) {
     
     var data = JSON.parse(e.postData.contents);
     
+    // --- Anti-abuse: honeypot (discard, no sheet write, no email) ---
+    if (isHoneypotTriggered(data)) {
+      Logger.log("Blocked: honeypot triggered.");
+      return decoySuccess();
+    }
+    
+    // --- Anti-abuse: origin allow-list (defense in depth, fail-open) ---
+    if (!isTrustedSource(e, data)) {
+      Logger.log("Blocked: untrusted origin/referer hint.");
+      return decoySuccess();
+    }
+    
     // --- Validate required fields ---
     var name  = trim(data.name);
     var email = trim(data.email);
@@ -73,6 +108,12 @@ function doPost(e) {
     // --- Validate description length ---
     if (desc.length > MAX_DESCRIPTION_LENGTH) {
       return jsonResponse(false, "Project description exceeds the maximum allowed length.");
+    }
+    
+    // --- Anti-abuse: global rate limit (fail-open, before any write) ---
+    if (!tryReserveThrottleSlot()) {
+      Logger.log("Blocked: throttle window exhausted.");
+      return jsonResponse(false, "Too many requests. Please try again later.");
     }
     
     // --- Write to Google Sheets ---
@@ -117,6 +158,103 @@ function jsonResponse(success, message) {
   return ContentService.createTextOutput(
     JSON.stringify({ success: success, message: message })
   ).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+/* ---- ANTI-ABUSE HELPERS ---- */
+
+/**
+ * Honeypot: the frontend never sends the optional "website" field, so a
+ * human can never trip it. Any non-empty value = automated bot.
+ */
+function isHoneypotTriggered(data) {
+  try {
+    return typeof data.website === "string" && data.website.trim() !== "";
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
+ * Origin/Referer guard (defense in depth, fail-open).
+ * Returns true when the request is trusted: no origin hint present, or every
+ * hint matches the allow-list. Returns false only on a POSITIVE mismatch.
+ * Hints are read from URL query params (e.parameter) and from the JSON body.
+ * Apps Script does not expose the real HTTP headers, so this never replaces
+ * real filtering — it only drops requests that openly claim a foreign origin.
+ */
+function isTrustedSource(e, data) {
+  var hints = [];
+
+  if (e && e.parameter) {
+    if (e.parameter.origin)  hints.push(e.parameter.origin);
+    if (e.parameter.referer) hints.push(e.parameter.referer);
+  }
+  if (data && typeof data === "object") {
+    if (data.origin)  hints.push(data.origin);
+    if (data.referer) hints.push(data.referer);
+  }
+  if (hints.length === 0) return true;
+
+  var allowed = {};
+  for (var i = 0; i < ALLOWED_ORIGINS.length; i++) {
+    allowed[normalizeOrigin(ALLOWED_ORIGINS[i])] = true;
+  }
+
+  for (var j = 0; j < hints.length; j++) {
+    var norm = normalizeOrigin(hints[j]);
+    if (norm !== "" && allowed[norm] !== true) return false;
+  }
+  return true;
+}
+
+/** Reduces a value to scheme://authority (no path, no trailing slash), or "". */
+function normalizeOrigin(value) {
+  var m = String(value).trim().toLowerCase().match(/^https?:\/\/[^/]+/);
+  return m ? m[0] : "";
+}
+
+/**
+ * Global throttle — fixed 120 s window, budget 3 accepted submissions.
+ * Atomically increments the counter (serialized by the caller's lock) and
+ * returns false once the window budget is exhausted. Fail-open: any
+ * PropertiesService error allows the request through, so a storage problem
+ * can never take the site down.
+ */
+function tryReserveThrottleSlot() {
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var state = { start: 0, count: 0 };
+
+    var raw = props.getProperty(THROTTLE_PROP_KEY);
+    if (raw) {
+      try {
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed.count === "number") state = parsed;
+      } catch (e) {
+        /* corrupt stored value — start a fresh window */
+      }
+    }
+
+    var now = Date.now();
+    if (now - state.start >= THROTTLE_WINDOW_SECONDS * 1000) {
+      state = { start: now, count: 0 };
+    }
+    state.count += 1;
+    props.setProperty(THROTTLE_PROP_KEY, JSON.stringify(state));
+
+    return state.count <= THROTTLE_MAX_PER_WINDOW;
+  } catch (err) {
+    return true; // fail-open
+  }
+}
+
+/**
+ * Decoy success so a bot cannot distinguish a blocked request from a real
+ * one (identical shape and message to the normal success response).
+ */
+function decoySuccess() {
+  return jsonResponse(true, "Project request successfully received");
 }
 
 

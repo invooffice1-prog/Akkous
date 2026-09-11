@@ -2,8 +2,6 @@
    AKKOUS — English dictionary
    Default (fallback) language. Keys MUST mirror fr.js and es.js.
    ============================================================ */
-import { WHATSAPP_MESSAGE } from "../config.js";
-
 export default {
   meta: {
     title: "AKKOUS — Websites, Booking Systems & Automation | Digital Studio",
@@ -238,6 +236,7 @@ export default {
 
   whatsapp: {
     tooltip: "Open WhatsApp chat",
-    message: WHATSAPP_MESSAGE,
+    message:
+      "Hello Akkous,\n\nI have a project in mind and I would like to discuss it with you.\n\nI am interested in a website, booking system, automation, prospecting workflow or digital design project.\n\nHere is a brief description of my project:\n\n---",
   },
 };

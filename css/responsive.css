@@ -93,6 +93,8 @@
     transition-duration: .01ms !important;
   }
   .reveal, .pipeline-mini { opacity: 1; transform: none; }
+  .eco .eco__links line { stroke-dashoffset: 0; }
+  .eco__node { animation: none; }
   html { scroll-behavior: auto; }
   .hero__particles, .cta__particles { display: none; }
   .hero__video { display: none; }

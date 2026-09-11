@@ -2,7 +2,7 @@
    AKKOUS — WhatsApp "Talk to Akkous" button
    ============================================================ */
 import { WHATSAPP_NUMBER } from "./config.js";
-import { t, getLanguage } from "./i18n.js";
+import { t } from "./i18n.js";
 
 /** Builds the wa.me link from the active language's prefilled message. */
 function buildWhatsAppUrl() {
@@ -22,7 +22,6 @@ export function initWhatsApp() {
   };
 
   apply();
-  getLanguage(); /* ensure i18n is initialised before building the link */
 
   /* Rebuild the link when the language changes (message is translated) */
   document.addEventListener("i18n:change", apply);

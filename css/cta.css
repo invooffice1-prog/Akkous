@@ -101,9 +101,9 @@
   from { opacity: 0; transform: translateY(16px); }
 }
 
-/* CTA button pulse */
-.cta__actions .btn--primary { animation: ctaPulse 3.2s ease-in-out infinite; }
+/* CTA button pulse — soft premium breathing glow, no expanding ring */
+.cta__actions .btn--primary { animation: ctaPulse 4s ease-in-out infinite; }
 @keyframes ctaPulse {
-  0%, 100% { box-shadow: var(--shadow-btn) rgba(99,102,241,.55); }
-  50% { box-shadow: 0 8px 44px -6px rgba(99,102,241,.85), 0 0 0 6px rgba(99,102,241,.08); }
+  0%, 100% { box-shadow: var(--shadow-btn) rgba(99,102,241,.5); }
+  50% { box-shadow: 0 10px 44px -8px rgba(99,102,241,.62), 0 0 0 3px rgba(99,102,241,.05); }
 }

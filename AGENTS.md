@@ -13,10 +13,10 @@ Lightweight custom system. No library, no build. Rules that are easy to break:
 - HTML has a small inline `<script>` that sets `<html lang>` from localStorage before render (FOUC mitigation) — keep in sync with the storage key `akkous-language`.
 
 ## Serve it
-ES modules fail on `file://`. Always serve: `python -m http.server <port>` from `D:\akkous`, then browse that URL.
+ES modules fail on `file://`. Always serve: `python -m http.server <port>` from `D:\DIGITAL STUDIO AKKOUS`, then browse that URL.
 
 ## Config (js/config.js) — single source of truth
-- `GOOGLE_SCRIPT_API_URL`, `MAX_DESCRIPTION_LENGTH`, `WHATSAPP_NUMBER`, `WHATSAPP_MESSAGE`.
+- `GOOGLE_SCRIPT_API_URL`, `MAX_DESCRIPTION_LENGTH`, `WHATSAPP_NUMBER`.
 - The description limit MUST be edited only here. `modal.js` sets `textarea.maxLength` from it and renders the counter from it. Never re-add a hardcoded `maxlength`/counter in `index.html` — it was deliberately removed.
 - If `WHATSAPP_NUMBER` changes, also update the no-JS fallback `href` on the `[data-wa-cta]` anchor in `index.html` (it hardcodes the number; `whatsapp.js` overwrites it from config).
 

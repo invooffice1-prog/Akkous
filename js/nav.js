@@ -44,7 +44,7 @@ export function initNav() {
 
   /* Close the menu if the viewport grows back to desktop */
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 720 && menu.classList.contains("open")) toggleMenu(false);
+    if (window.innerWidth >= 721 && menu.classList.contains("open")) toggleMenu(false);
   });
 
   /* Re-translate the burger label when the language changes */

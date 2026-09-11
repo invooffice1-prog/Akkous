@@ -24,4 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* Stagger service card children */
   stagger(".svc-grid", 0.08);
+
+  /* Choreographed hero entrance — label → title → sub → actions → meta → visual */
+  const heroSteps = [".hero__label", ".hero__title .hero__line", ".hero__sub", ".hero__actions", ".hero__meta", ".hero__visual"];
+  heroSteps.forEach((sel, i) => {
+    document.querySelectorAll(sel).forEach((el) => {
+      el.style.transitionDelay = `${i * 0.08}s`;
+    });
+  });
 });

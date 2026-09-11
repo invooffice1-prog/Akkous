@@ -43,11 +43,13 @@
   border-radius: var(--radius-lg);
   padding: 40px 40px 36px;
   box-shadow: 0 32px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(79,124,255,.06);
-  transform: scale(.95) translateY(12px);
-  transition: transform .35s var(--ease);
+  opacity: 0;
+  transform: scale(.94) translateY(8px);
+  transition: transform .45s var(--ease), opacity .3s;
 }
 .modal.open .modal__container {
   transform: scale(1) translateY(0);
+  opacity: 1;
 }
 
 /* ---- Close button ---- */
@@ -254,7 +256,7 @@
 @media (max-width: 600px) {
   .modal__container {
     padding: 28px 22px 24px;
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
   }
   .modal__close {
     top: 12px;
