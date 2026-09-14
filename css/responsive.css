@@ -11,9 +11,20 @@
 /* Tablet landscape */
 @media (max-width: 900px) {
   .svc-grid { grid-template-columns: repeat(2, 1fr); }
-  .svc { grid-column: span 1; }
-  .svc--featured { grid-column: span 2; grid-row: auto; }
-  .svc--booking { grid-column: span 1; grid-row: auto; }
+  .svc, .svc--featured, .svc--tall { grid-column: span 1; }
+  .svc--featured {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .svc--featured .svc-visual {
+    height: 230px;
+    align-self: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .svc--featured .svc-body { padding: 28px 26px 24px; }
+  .svc--featured h3 { font-size: 24px; }
+  .svc--tall .svc-visual { height: 240px; }
 }
 
 /* Tablet portrait / mobile */
@@ -40,37 +51,14 @@
 
   /* Services grid */
   .svc-grid { grid-template-columns: 1fr; }
-  .svc, .svc--featured, .svc--booking {
-    grid-column: span 1;
-    padding: 30px 24px;
-  }
-  .svc--featured h3 { font-size: 26px; }
-  .svc__tiers { grid-template-columns: 1fr; gap: 10px; }
-  .svc__visual { min-height: 230px; }
-
-  /* Featured travel preview */
-  .travel-nav { padding: 11px 16px; gap: 12px; }
-  .travel-links { gap: 10px; }
-  .travel-links span:nth-child(2) { display: none; }
-  .travel-hero { padding: 26px 14px 20px; }
-  .travel-hero-title { font-size: 24px; }
-  .travel-hero-sub { font-size: 12px; margin-bottom: 16px; }
-  .travel-hero-btn { padding: 9px 18px; font-size: 12px; }
-  .travel-cards { gap: 8px; padding: 0 16px 16px; }
-  .travel-card-photo { height: 58px; }
-  .travel-card-body { padding: 8px 10px 10px; }
-  .travel-card-body b { font-size: 12px; }
-  .travel-card-body small { font-size: 10px; }
-
-  /* Booking */
-  .booking-demo { grid-template-columns: 1fr; gap: 14px; }
-  .booking-flow { max-width: none; }
-  .flow-line { height: 14px; }
-  .booking-form, .booking-sheet { max-width: none; }
-
-  /* Workflows */
-  .svc__benefits { grid-template-columns: 1fr; }
-  .design-assets { max-width: none; }
+  .svc, .svc--featured, .svc--tall { grid-column: span 1; }
+  .svc-visual { height: 190px; }
+  .svc--tall .svc-visual { height: 200px; }
+  .svc--featured { min-height: 0; }
+  .svc--featured .svc-visual { height: 200px; }
+  .svc--featured .svc-body { padding: 24px 22px 20px; }
+  .svc--featured h3 { font-size: 24px; }
+  .svc-body { padding: 22px 20px 20px; }
 
   /* Marquee */
   .marquee__track span { font-size: 17px; }
@@ -92,7 +80,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
-  .reveal, .pipeline-mini { opacity: 1; transform: none; }
+  .reveal { opacity: 1; transform: none; }
+  .svc-visual img { opacity: 1; transform: none; }
+  .svc-video__pane { transform: translate(-50%, -50%); }
   .eco .eco__links line { stroke-dashoffset: 0; }
   .eco__node { animation: none; }
   html { scroll-behavior: auto; }

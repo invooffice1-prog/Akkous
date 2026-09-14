@@ -138,6 +138,3 @@ section { scroll-margin-top: var(--nav-height); }
   opacity: 1;
   transform: none;
 }
-.reveal:nth-child(2) { transition-delay: .08s; }
-.reveal:nth-child(3) { transition-delay: .16s; }
-.reveal:nth-child(4) { transition-delay: .24s; }
