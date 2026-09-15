@@ -181,6 +181,7 @@ export default {
     counter: "{count} / {max}",
     submit: "Send Request",
     submitting: "Sending your request...",
+    privacyNote: "We only use your details to reply to your request.",
     successTitle: "Thank you!",
     successText:
       "We have received your project details. A member of our team will contact you soon.",

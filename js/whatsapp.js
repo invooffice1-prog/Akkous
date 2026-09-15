@@ -12,17 +12,20 @@ function buildWhatsAppUrl() {
 }
 
 export function initWhatsApp() {
-  const cta = document.querySelector("[data-wa-cta]");
-  if (!cta) return;
+  const ctas = document.querySelectorAll("[data-wa-cta]");
+  if (!ctas.length) return;
 
   const apply = () => {
-    cta.setAttribute("href", buildWhatsAppUrl());
-    cta.setAttribute("target", "_blank");
-    cta.setAttribute("rel", "noopener noreferrer");
+    const url = buildWhatsAppUrl();
+    ctas.forEach((cta) => {
+      cta.setAttribute("href", url);
+      cta.setAttribute("target", "_blank");
+      cta.setAttribute("rel", "noopener noreferrer");
+    });
   };
 
   apply();
 
-  /* Rebuild the link when the language changes (message is translated) */
+  /* Rebuild the links when the language changes (message is translated) */
   document.addEventListener("i18n:change", apply);
 }

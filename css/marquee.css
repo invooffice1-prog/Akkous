@@ -29,6 +29,7 @@
   white-space: nowrap;
   width: max-content;
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 .marquee:hover .marquee__track { animation-play-state: paused; }
 .marquee__track span {

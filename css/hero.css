@@ -190,6 +190,7 @@
 .eco__core-ring {
   transform-origin: 280px 280px;
   animation: spin 24s linear infinite;
+  will-change: transform;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .eco__core-text {

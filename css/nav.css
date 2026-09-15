@@ -33,6 +33,10 @@
   letter-spacing: .08em;
 }
 .nav__logo-dot { color: var(--cyan); }
+.nav__logo:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
 
 .nav__links { display: flex; gap: 34px; margin-left: auto; }
 .nav__links a {
@@ -65,8 +69,8 @@
   background: none;
   border: 0;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   position: relative;
   z-index: 120;
 }
@@ -84,6 +88,10 @@
 }
 .nav__burger.open span:nth-child(2) {
   transform: translateY(-3.5px) rotate(-45deg);
+}
+.nav__burger:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 /* ---------- Language switcher ---------- */
@@ -166,3 +174,36 @@
 .mobile-menu.open .mobile-menu__link { opacity: 1; transform: none; }
 .mobile-menu.open .mobile-menu__link:nth-child(1) { transition-delay: .08s; }
 .mobile-menu.open .mobile-menu__link:nth-child(2) { transition-delay: .14s; }
+.mobile-menu__link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* Secondary WhatsApp alternative in the mobile menu */
+.mobile-menu__wa {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,.03);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: color .3s, border-color .3s, background .3s, opacity .5s var(--ease), transform .5s var(--ease);
+}
+.mobile-menu.open .mobile-menu__wa {
+  opacity: 1;
+  transform: none;
+  transition-delay: .2s;
+}
+.mobile-menu__wa:hover {
+  color: var(--text);
+  border-color: rgba(34,211,238,.5);
+  background: rgba(34,211,238,.08);
+}
+.mobile-menu__wa:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}

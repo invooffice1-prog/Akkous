@@ -7,6 +7,16 @@ export function initParticles() {
 
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
+  /* Brand colors read from tokens.css — single source of truth, no build step */
+  const rootStyle = getComputedStyle(document.documentElement);
+  const COLORS = ["--blue", "--violet", "--cyan"].map((token) => {
+    const hex = rootStyle.getPropertyValue(token).trim();
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `${r},${g},${b}`;
+  });
+
   function create(canvasId) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
@@ -17,7 +27,6 @@ export function initParticles() {
     let rafId = 0;
     let visible = false;
     const COUNT = reduced ? 26 : 52;
-    const COLORS = ["79,124,255", "139,92,246", "34,211,238"];
 
     const resize = () => {
       const rect = canvas.parentElement.getBoundingClientRect();
@@ -55,7 +64,7 @@ export function initParticles() {
           const dist = Math.hypot(dx, dy);
           if (dist < 120) {
             const alpha = (1 - dist / 120) * 0.4;
-            ctx.strokeStyle = `rgba(139,92,246,${alpha})`;
+            ctx.strokeStyle = `rgba(${COLORS[1]},${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);

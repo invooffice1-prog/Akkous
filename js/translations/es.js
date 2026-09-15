@@ -183,6 +183,7 @@ export default {
     counter: "{count} / {max}",
     submit: "Enviar solicitud",
     submitting: "Enviando tu solicitud...",
+    privacyNote: "Solo usamos tus datos para responder a tu solicitud.",
     successTitle: "¡Gracias!",
     successText:
       "Hemos recibido los datos de tu proyecto. Un miembro de nuestro equipo te contactará pronto.",

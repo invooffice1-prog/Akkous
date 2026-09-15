@@ -10,6 +10,9 @@
 
 /* Tablet landscape */
 @media (max-width: 900px) {
+  .nav__links a { padding: 11px 0; }
+  .lang-switch__btn { min-height: 44px; }
+  .footer__links a { padding: 12px 0; }
   .svc-grid { grid-template-columns: repeat(2, 1fr); }
   .svc, .svc--featured, .svc--tall { grid-column: span 1; }
   .svc--featured {
@@ -28,6 +31,7 @@
 }
 
 /* Tablet portrait / mobile */
+/* Keep 720px in sync with the mobile-menu logic in js/nav.js (innerWidth > 720). */
 @media (max-width: 720px) {
   :root {
     --container-pad: 24px;
@@ -37,7 +41,7 @@
   /* Nav */
   .nav__links, .nav__cta { display: none; }
   .nav__burger { display: block; }
-  .lang-switch__btn { padding: 5px 9px; }
+  .lang-switch__btn { padding: 5px 9px; min-height: 44px; }
   .nav__inner { gap: 12px; }
   .nav__inner .lang-switch { margin-left: auto; }
 

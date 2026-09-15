@@ -39,7 +39,6 @@
       "@type": "Organization",
       "@id": "https://www.akkous.com/#organization",
       "name": "AKKOUS",
-      "legalName": "AKKOUS",
       "url": "https://www.akkous.com/",
       "logo": "https://www.akkous.com/assets/og-image.png",
       "description": "AKKOUS builds business websites, booking systems, automations and prospecting workflows — professional digital design that helps your company operate and grow online.",
@@ -70,7 +69,8 @@
 </script>
 <script>
   /* Set the document language before render to avoid an English flash
-     when a non-default language is stored (FOUC mitigation). */
+     when a non-default language is stored (FOUC mitigation).
+     Keep the storage key in sync with LANGUAGE_STORAGE_KEY in js/i18n.js. */
   (function () {
     try {
       var lang = localStorage.getItem("akkous-language");
@@ -81,7 +81,9 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◈</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://www.youtube.com" crossorigin />
+<link rel="preconnect" href="https://i.ytimg.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <!-- CSS Modules — each file has a single responsibility -->
 <link rel="stylesheet" href="css/tokens.css" />
@@ -112,7 +114,7 @@
       <button class="lang-switch__btn" type="button" data-lang="es" aria-label="Español" title="Español" aria-pressed="false">ES</button>
     </div>
     <a href="#start" class="btn btn--sm nav__cta js-open-modal" data-i18n="buttons.startProject">Start a Project</a>
-    <button class="nav__burger" id="burger" aria-label="Open menu" data-i18n-aria-label="nav.openMenu" aria-expanded="false">
+    <button class="nav__burger" id="burger" aria-label="Open menu" data-i18n-aria-label="nav.openMenu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span>
     </button>
   </div>
@@ -124,6 +126,7 @@
       <a href="#start" class="mobile-menu__link" data-i18n="nav.start">Start</a>
     </nav>
     <a href="#start" class="btn mobile-menu__cta js-open-modal" data-i18n="buttons.startProject">Start a Project</a>
+    <a href="https://wa.me/48889271562" class="mobile-menu__wa" data-wa-cta target="_blank" rel="noopener noreferrer" data-i18n-title="whatsapp.tooltip" data-i18n="buttons.talkToAkkous">Talk to Akkous</a>
 </div>
 
 <main id="top">
@@ -152,7 +155,8 @@
         We craft digital presences, websites, content, marketing and visual materials for businesses — so you attract attention, build trust and grow.
       </p>
       <div class="hero__actions reveal">
-        <a href="#start" class="btn btn--primary magnetic js-open-modal" data-i18n="buttons.startProject">Start a Project
+        <a href="#start" class="btn btn--primary magnetic js-open-modal">
+          <span data-i18n="buttons.startProject">Start a Project</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a href="#services" class="btn btn--ghost magnetic" data-i18n="buttons.exploreServices">Explore Services</a>
@@ -271,7 +275,7 @@
       <!-- SERVICE 01 — WEBSITE CREATION (featured) -->
       <article class="svc svc--featured reveal" data-accent="blue">
         <div class="svc-visual">
-          <img src="assets/services/website/website.jpg" alt="AKKOUS website design" data-i18n-alt="services.website.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/website/website.jpg" alt="AKKOUS website design" data-i18n-alt="services.website.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 9h18M9 16h6"/></svg>
           </span>
@@ -285,14 +289,14 @@
             <li class="svc-tag" data-i18n="services.website.t2">Showcase sites</li>
             <li class="svc-tag" data-i18n="services.website.t3">Professional websites</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
       <!-- SERVICE 02 — DIGITAL MARKETING -->
       <article class="svc reveal" data-accent="cyan">
         <div class="svc-visual">
-          <img src="assets/services/marketing/marketing.jpg" alt="AKKOUS digital marketing" data-i18n-alt="services.marketing.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/marketing/marketing.jpg" alt="AKKOUS digital marketing" data-i18n-alt="services.marketing.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 11-5.8-1.6"/></svg>
           </span>
@@ -306,14 +310,14 @@
             <li class="svc-tag" data-i18n="services.marketing.t2">Online presence</li>
             <li class="svc-tag" data-i18n="services.marketing.t3">Campaigns &amp; acquisition</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
       <!-- SERVICE 03 — CONTENT & BLOGGING -->
       <article class="svc reveal" data-accent="violet">
         <div class="svc-visual">
-          <img src="assets/services/content/content.jpg" alt="AKKOUS content creation" data-i18n-alt="services.content.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/content/content.jpg" alt="AKKOUS content creation" data-i18n-alt="services.content.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.12 2.12 0 013 3L8.5 19l-4.5 1z"/></svg>
           </span>
@@ -327,14 +331,14 @@
             <li class="svc-tag" data-i18n="services.content.t2">Social media content</li>
             <li class="svc-tag" data-i18n="services.content.t3">Brand-fit content</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
       <!-- SERVICE 04 — SEO STRENGTHENING -->
       <article class="svc reveal" data-accent="cyan">
         <div class="svc-visual">
-          <img src="assets/services/seo/seo.jpg" alt="AKKOUS SEO optimization" data-i18n-alt="services.seo.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/seo/seo.jpg" alt="AKKOUS SEO optimization" data-i18n-alt="services.seo.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M8 11l2 2 4-4"/></svg>
           </span>
@@ -348,14 +352,14 @@
             <li class="svc-tag" data-i18n="services.seo.t2">Better visibility</li>
             <li class="svc-tag" data-i18n="services.seo.t3">Search-optimized content</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
       <!-- SERVICE 05 — SERVICE CATALOGUES -->
       <article class="svc reveal" data-accent="blue">
         <div class="svc-visual">
-          <img src="assets/services/catalogues/catalogues.jpg" alt="AKKOUS service catalogues" data-i18n-alt="services.catalogues.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/catalogues/catalogues.jpg" alt="AKKOUS service catalogues" data-i18n-alt="services.catalogues.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20V2H6.5A2.5 2.5 0 004 4.5v15z"/><path d="M4 19.5A2.5 2.5 0 016.5 17H20v5H6.5A2.5 2.5 0 014 19.5z"/></svg>
           </span>
@@ -369,14 +373,14 @@
             <li class="svc-tag" data-i18n="services.catalogues.t2">Printed catalogues</li>
             <li class="svc-tag" data-i18n="services.catalogues.t3">Professional presentation</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
       <!-- SERVICE 06 — MARKETING MATERIALS -->
       <article class="svc reveal" data-accent="violet">
         <div class="svc-visual">
-          <img src="assets/services/marketing-materials/materials.jpg" alt="AKKOUS marketing materials" data-i18n-alt="services.materials.imgAlt" loading="lazy" decoding="async" />
+          <img src="assets/services/marketing-materials/materials.jpg" alt="AKKOUS marketing materials" data-i18n-alt="services.materials.imgAlt" loading="lazy" decoding="async" fetchpriority="low" />
           <span class="svc-visual__badge" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
           </span>
@@ -391,7 +395,7 @@
             <li class="svc-tag" data-i18n="services.materials.t3">Presentations</li>
             <li class="svc-tag" data-i18n="services.materials.t4">Sales materials</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
@@ -412,7 +416,7 @@
             <li class="svc-tag" data-i18n="services.drone.t2">Aerial drone shots</li>
             <li class="svc-tag" data-i18n="services.drone.t3">Showcasing your locations</li>
           </ul>
-          <span class="svc__arrow" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <a href="#start" class="svc__arrow js-open-modal" aria-label="Start a Project" data-i18n-aria-label="buttons.startProject"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
         </div>
       </article>
 
@@ -438,7 +442,8 @@
       <span class="cta__flow-step cta__flow-step--solution" data-i18n="cta.flowSolution">Digital Solution</span>
     </div>
     <div class="cta__actions">
-      <a href="#start" class="btn btn--primary btn--lg magnetic js-open-modal" data-i18n="buttons.startProject">Start a Project
+      <a href="#start" class="btn btn--primary btn--lg magnetic js-open-modal">
+        <span data-i18n="buttons.startProject">Start a Project</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
       <a href="https://wa.me/48889271562" class="btn btn--ghost btn--lg magnetic" data-wa-cta target="_blank" rel="noopener noreferrer" data-i18n-title="whatsapp.tooltip" data-i18n="buttons.talkToAkkous">Talk to Akkous</a>
@@ -455,6 +460,7 @@
     <nav class="footer__links" aria-label="Footer navigation" data-i18n-aria-label="footer.navAria">
       <a href="#services" data-i18n="nav.services">Services</a>
       <a href="#start" data-i18n="nav.start">Start</a>
+      <a href="https://wa.me/48889271562" data-wa-cta target="_blank" rel="noopener noreferrer" data-i18n-title="whatsapp.tooltip" data-i18n="buttons.talkToAkkous">Talk to Akkous</a>
     </nav>
     <p class="footer__note" data-i18n="footer.note">Websites, automation, systems &amp; digital design.</p>
   </div>
@@ -463,7 +469,7 @@
 <!-- PROJECT REQUEST MODAL -->
 <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
   <div class="modal__backdrop" id="modalBackdrop"></div>
-  <div class="modal__container" role="document">
+  <div class="modal__container">
     <button class="modal__close" id="modalClose" aria-label="Close dialog" data-i18n-aria-label="modal.closeAria">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
@@ -477,22 +483,22 @@
     <form class="modal__form" id="projectForm" novalidate>
       <div class="form-group">
         <label for="formName" data-i18n="form.name">Full Name</label>
-        <input type="text" id="formName" name="name" placeholder="Full name" data-i18n-placeholder="form.namePlaceholder" required autocomplete="name" />
+        <input type="text" id="formName" name="name" placeholder="Full name" data-i18n-placeholder="form.namePlaceholder" required autocomplete="name" aria-describedby="nameError" aria-invalid="false" />
         <span class="form-error" id="nameError"></span>
       </div>
       <div class="form-group">
         <label for="formEmail" data-i18n="form.email">Email Address</label>
-        <input type="email" id="formEmail" name="email" placeholder="client@email.com" data-i18n-placeholder="form.emailPlaceholder" required autocomplete="email" />
+        <input type="email" id="formEmail" name="email" placeholder="client@email.com" data-i18n-placeholder="form.emailPlaceholder" required autocomplete="email" aria-describedby="emailError" aria-invalid="false" />
         <span class="form-error" id="emailError"></span>
       </div>
       <div class="form-group">
         <label for="formWhatsApp" data-i18n="form.whatsapp">WhatsApp Number</label>
-        <input type="tel" id="formWhatsApp" name="whatsapp" placeholder="+212 6 XX XX XX XX" data-i18n-placeholder="form.whatsappPlaceholder" required autocomplete="tel" />
+        <input type="tel" id="formWhatsApp" name="whatsapp" placeholder="+212 6 XX XX XX XX" data-i18n-placeholder="form.whatsappPlaceholder" required autocomplete="tel" aria-describedby="whatsappError" aria-invalid="false" />
         <span class="form-error" id="whatsappError"></span>
       </div>
       <div class="form-group">
         <label for="formDesc" data-i18n="form.description">Project Description</label>
-        <textarea id="formDesc" name="projectDescription" rows="5" placeholder="Describe your project and your needs..." data-i18n-placeholder="form.descPlaceholder" required></textarea>
+        <textarea id="formDesc" name="projectDescription" rows="5" placeholder="Describe your project and your needs..." data-i18n-placeholder="form.descPlaceholder" required aria-describedby="descError" aria-invalid="false"></textarea>
         <div class="form-meta">
           <span class="form-error" id="descError"></span>
           <span class="form-counter" id="charCounter"></span>
@@ -503,6 +509,7 @@
         <span class="modal__submit-loading" data-i18n="form.submitting">Sending your request...</span>
         <svg class="modal__submit-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+      <p class="form-note" data-i18n="form.privacyNote">We only use your details to reply to your request.</p>
     </form>
 
     <div class="modal__success" id="successMessage">
@@ -515,6 +522,16 @@
 </div>
 
 <!-- JS Modules -->
+<link rel="modulepreload" href="js/i18n.js" />
+<link rel="modulepreload" href="js/config.js" />
+<link rel="modulepreload" href="js/modal.js" />
+<link rel="modulepreload" href="js/nav.js" />
+<link rel="modulepreload" href="js/particles.js" />
+<link rel="modulepreload" href="js/reveal.js" />
+<link rel="modulepreload" href="js/magnetic.js" />
+<link rel="modulepreload" href="js/spotlight.js" />
+<link rel="modulepreload" href="js/services.js" />
+<link rel="modulepreload" href="js/whatsapp.js" />
 <script type="module" src="js/main.js"></script>
 </body>
 </html>

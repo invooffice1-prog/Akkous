@@ -1,11 +1,19 @@
 # AGENTS.md — AKKOUS website
 
-Pure static marketing site. No build, no framework, no package manager, no tests/lint in-repo. `css/` (15 files) + `js/` (10 ES modules) each own one responsibility; `main.js` is the only entry point.
+Pure static marketing site. No build, no framework, no package manager, no tests/lint in-repo. `css/` (11 files) + `js/` (12 ES modules + 3 translation dictionaries) each own one responsibility; `main.js` is the only entry point.
+
+## Architecture Decisions (decided)
+- **No build / static site** — HTML, CSS, JS are served as authored. No bundler, no transpilation, no package manager in-repo.
+- **`main.js` is the only entry point** — it imports and initializes every module on `DOMContentLoaded`. Never add another top-level `<script>` entry.
+- **`initI18n()` MUST run first** in `main.js` (it already does) — every other module depends on `t()` / the language state.
+- **i18n via `t('key')` + the `i18n:change` CustomEvent** — modules re-render their dynamic strings on that event; no cross-module imports for language state.
+- **`js/config.js` is the single source of truth** for constants (`GOOGLE_SCRIPT_API_URL`, `MAX_DESCRIPTION_LENGTH`, `WHATSAPP_NUMBER`).
+- **No tests/lint in-repo (current decision)** — verification happens via external Playwright QA scripts (see QA section below), kept out of the repo to preserve the no-package-manager principle.
 
 ## i18n (multi-language: en / fr / es)
 Lightweight custom system. No library, no build. Rules that are easy to break:
 - `js/i18n.js` owns language state, `t('key')`, DOM application, localStorage (`akkous-language`), and the `i18n:change` CustomEvent. `initI18n()` MUST run first in `main.js` (it already does).
-- Dictionaries: `js/translations/{en,fr,es}.js`, each `export default`. The three MUST have identical keys (151 each) — verify with a flat-key diff after editing. Missing keys fall back to EN then to the key itself + console.warn.
+- Dictionaries: `js/translations/{en,fr,es}.js`, each `export default`. The three MUST keep an exact leaf-key parity (130 leaf keys each today) — verify with a flat-key diff after editing. Missing keys fall back to EN then to the key itself + console.warn.
 - HTML text uses `data-i18n`, `data-i18n-content` (trusted markup like `<br/>`/`<em>`), `data-i18n-placeholder`, `data-i18n-title`, `data-i18n-alt`, `data-i18n-aria-label`. Set by `applyTranslations()`.
 - All user-visible JS strings use `t('key')`. For widgets that render text at runtime (char counter, validation, WhatsApp link, burger aria-label), re-render on `i18n:change` — see `modal.js`, `whatsapp.js`, `nav.js`.
 - `data-i18n` sets `textContent` (wipes child nodes) — if an element contains a child icon (`<i>`), wrap the translatable text in its own span with `data-i18n`.
@@ -25,6 +33,7 @@ ES modules fail on `file://`. Always serve: `python -m http.server <port>` from 
 - `[data-wa-cta]` = "Talk to Akkous" button → WhatsApp link built from config, `target=_blank` + `rel=noopener noreferrer`.
 - z-index map: modal `1000` > nav `200` > mobile-menu `110`. Hero layers: video `0` → veil `1` → grid `2` → glows `3` → particles `4` → content `5`. Keep ordering when editing hero.
 - Mobile-menu breakpoint is `720px`, re-used in BOTH `responsive.css` and `nav.js` (`innerWidth > 720` auto-closes menu). Change both or they desync.
+- Brand colors are read at runtime by `particles.js` from `tokens.css` (`--blue`/`--violet`/`--cyan`) via `getComputedStyle` — changing a brand color updates particles automatically.
 - Modal reset semantics: user input is preserved on close and reopen — `form.reset()` happens ONLY inside `showSuccess()`. Do not "fix" this back to reset-on-close; it's spec'd.
 
 ## Backend (google-apps-script.gs)

@@ -17,6 +17,20 @@ export function initNav() {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  /* Background inert when menu open */
+  const setBackgroundInert = (on) => {
+    [document.querySelector("main"), document.querySelector(".footer")].forEach((el) => {
+      if (!el) return;
+      if (on) {
+        el.setAttribute("inert", "");
+        el.setAttribute("aria-hidden", "true");
+      } else {
+        el.removeAttribute("inert");
+        el.removeAttribute("aria-hidden");
+      }
+    });
+  };
+
   /* Mobile menu toggle */
   const toggleMenu = (open) => {
     const isOpen = open !== undefined ? open : !menu.classList.contains("open");
@@ -26,6 +40,10 @@ export function initNav() {
     menu.setAttribute("aria-hidden", String(!isOpen));
     applyBurgerLabel(isOpen);
     document.body.style.overflow = isOpen ? "hidden" : "";
+    setBackgroundInert(isOpen);
+    if (!isOpen && window.getComputedStyle(burger).display !== "none") {
+      burger.focus();
+    }
   };
 
   applyBurgerLabel(false);
@@ -36,6 +54,24 @@ export function initNav() {
   menu.querySelectorAll("a").forEach((a) =>
     a.addEventListener("click", () => toggleMenu(false))
   );
+
+  /* Focus trap: keep Tab cycles inside the open menu */
+  window.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab" || !menu.classList.contains("open")) return;
+    const focusable = [...menu.querySelectorAll("a[href], button:not([disabled])")].filter(
+      (el) => getComputedStyle(el).display !== "none"
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   /* Close on Escape */
   window.addEventListener("keydown", (e) => {
