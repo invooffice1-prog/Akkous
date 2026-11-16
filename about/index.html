@@ -150,7 +150,7 @@
 
     <figure class="profile-portrait reveal">
       <img
-        class="profile-portrait__img"
+        class="profile-portrait__fallback"
         src="../assets/onouari.jpg"
         alt="Portrait of Youssef Onouari"
         data-i18n-alt="parcours.profile.portraitAlt"
@@ -159,6 +159,20 @@
         loading="eager"
         decoding="async"
       />
+      <video
+        class="profile-portrait__video"
+        poster="../assets/onouari.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+        oncanplay="if (matchMedia('(prefers-reduced-motion: reduce)').matches) { this.pause(); } else { this.play().catch(function () {}); }"
+        onerror="this.style.display='none'"
+      >
+        <source src="../assets/b_Animate.mp4" type="video/mp4" onerror="this.parentElement.style.display='none'" />
+      </video>
       <figcaption class="profile-portrait__caption">
         <span class="profile-portrait__role" data-i18n="parcours.profile.role">Creator &amp; founder of AKKOUS</span>
         <span class="profile-portrait__location" data-i18n="parcours.profile.location">Tangier, Morocco</span>
