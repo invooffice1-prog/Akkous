@@ -100,18 +100,24 @@ function applyTranslations() {
     el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria-label")));
   });
 
-  /* Head — title + meta description */
-  document.title = t("meta.title");
+  /* Head — page-aware title + meta description */
+  const metaKey = document.body.dataset.page
+    ? `${document.body.dataset.page}.meta`
+    : "meta";
+  const metaTitle = t(`${metaKey}.title`);
+  const metaDescription = t(`${metaKey}.description`);
+
+  document.title = metaTitle;
   const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) metaDesc.setAttribute("content", t("meta.description"));
+  if (metaDesc) metaDesc.setAttribute("content", metaDescription);
 
   /* SEO metadata localized on language switch */
-  metaContent('meta[property="og:title"]', t("meta.ogTitle"));
-  metaContent('meta[property="og:description"]', t("meta.ogDescription"));
-  metaContent('meta[property="og:locale"]', t("meta.ogLocale"));
-  metaContent('meta[property="og:site_name"]', t("meta.siteName"));
-  metaContent('meta[name="twitter:title"]', t("meta.ogTitle"));
-  metaContent('meta[name="twitter:description"]', t("meta.ogDescription"));
+  metaContent('meta[property="og:title"]', t(`${metaKey}.ogTitle`));
+  metaContent('meta[property="og:description"]', t(`${metaKey}.ogDescription`));
+  metaContent('meta[property="og:locale"]', t(`${metaKey}.ogLocale`));
+  metaContent('meta[property="og:site_name"]', t(`${metaKey}.siteName`));
+  metaContent('meta[name="twitter:title"]', t(`${metaKey}.ogTitle`));
+  metaContent('meta[name="twitter:description"]', t(`${metaKey}.ogDescription`));
 
   /* Localized JSON-LD (name + description) */
   const seoLd = document.querySelector('script[type="application/ld+json"][data-seo]');
@@ -122,11 +128,11 @@ function applyTranslations() {
         if (!node || typeof node !== "object") return;
         if (node["@type"] === "Organization") {
           node.name = "AKKOUS";
-          node.description = t("meta.description");
+          node.description = metaDescription;
         }
         if (node["@type"] === "WebSite" || node["@type"] === "WebPage") {
-          node.description = t("meta.description");
-          node.name = t("meta.title");
+          node.description = metaDescription;
+          node.name = metaTitle;
         }
         if (Array.isArray(node)) node.forEach(apply);
       };

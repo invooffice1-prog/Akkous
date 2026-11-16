@@ -11,4 +11,9 @@
       <image:title>AKKOUS — Digital Studio</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.akkous.com/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

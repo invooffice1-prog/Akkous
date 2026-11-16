@@ -163,6 +163,7 @@ export default {
   footer: {
     navAria: "Navigation du pied de page",
     note: "Sites web, automatisation, systèmes & design digital.",
+    parcours: "Parcours & projets",
   },
 
   modal: {
@@ -208,5 +209,156 @@ export default {
     tooltip: "Ouvrir la conversation WhatsApp",
     message:
       "Bonjour Akkous,\n\nJ'ai un projet en tête et j'aimerais en discuter avec vous.\n\nJe suis intéressé(e) par un site web, un système de réservation, une automatisation, un parcours de prospection ou un projet de design digital.\n\nVoici une brève description de mon projet :\n\n---",
+  },
+
+  parcours: {
+    meta: {
+      title: "Youssef Onouari — Créateur d'AKKOUS | Parcours & projets",
+      description:
+        "Youssef Onouari, créateur d'AKKOUS, est développeur web, designer et spécialiste du marketing digital basé à Tanger, au Maroc. Découvrez ses projets freelance et son parcours.",
+      ogTitle: "Youssef Onouari — Créateur d'AKKOUS | Parcours & projets",
+      ogDescription:
+        "Découvrez Youssef Onouari, créateur d'AKKOUS : développement web, design, marketing digital, création de contenu et référencement depuis Tanger, au Maroc.",
+      locale: "fr",
+      ogLocale: "fr_FR",
+      siteName: "AKKOUS",
+    },
+    hero: {
+      kicker: "— Créateur d'AKKOUS",
+      titleAccent: "créateur d'AKKOUS.",
+      sub:
+        "Basé à Tanger, au Maroc, je conçois et développe des sites web, des identités visuelles, du contenu et des dispositifs de marketing digital qui aident les entreprises à exister et à grandir en ligne.",
+      tagsAria: "Domaines d'expertise",
+      tagWeb: "Développement web",
+      tagDesign: "Design",
+      tagMarketing: "Marketing digital",
+      tagContent: "Création de contenu",
+      tagSeo: "Référencement SEO",
+      viewProjects: "Voir mes projets",
+      contact: "Parlons de votre projet",
+    },
+    profile: {
+      aria: "Profil de Youssef Onouari",
+      portraitAlt: "Portrait de Youssef Onouari",
+      studio: "Studio digital indépendant",
+      role: "Créateur & fondateur d'AKKOUS",
+      location: "Tanger, Maroc",
+      focusLine: "Web — design — marketing digital — contenu — référencement",
+    },
+    projects: {
+      kicker: "— Portfolio",
+      title: "Une sélection de mes<br/><em>projets freelance.</em>",
+      intro:
+        "Je suis Youssef Onouari, créateur d’AKKOUS. Voici une sélection de projets que j’ai réalisés avec AKKOUS, ainsi que des missions auxquelles j’ai contribué.",
+      visit: "Voir le site",
+      menuscan: {
+        tagline: "Votre menu digital QR Code prêt en moins d'une heure.",
+        desc:
+          "J’ai créé MenuScan avec AKKOUS pour permettre aux restaurateurs de mettre leur carte en ligne et de la partager via un QR code.",
+        usage:
+          "Le restaurateur transmet ses produits et ses tarifs, puis reçoit le QR code à afficher dans son établissement.",
+      },
+      invooffice: {
+        tagline: "Votre facturation, simplement.",
+        desc:
+          "J’ai développé Invooffice avec AKKOUS pour simplifier la facturation des indépendants et des petites entreprises au Maroc.",
+        usage:
+          "L’outil permet de créer, d’exporter et d’envoyer des devis, des factures, des bons de livraison et des avoirs en PDF.",
+      },
+      waapply: {
+        tagline: "CV, candidatures et suivi.",
+        desc:
+          "J’ai développé WAAPPLY avec AKKOUS pour aider les candidats à organiser leurs démarches de recherche d’emploi en Europe.",
+        usage:
+          "Le service les accompagne dans la préparation du CV, l’envoi des candidatures et leur suivi.",
+      },
+      dynamic: {
+        location: "Tamraght, baie de Taghazout, Maroc",
+        desc:
+          "J’ai réalisé avec AKKOUS un site qui présente les séjours de surf tout compris de Dynamic Loisirs à Tamraght.",
+        usage:
+          "Il permet aux visiteurs de découvrir les formules, l’encadrement et les conditions de surf dans la baie de Taghazout.",
+      },
+      mouja: {
+        location: "Baie de Taghazout, Maroc",
+        desc:
+          "J’ai réalisé avec AKKOUS un site qui présente le camp de surf et de yoga de Mouja Taghazout.",
+        usage:
+          "Les visiteurs peuvent y découvrir le séjour en bord de mer, les sessions de surf, les cours de yoga et les excursions.",
+      },
+      zawan: {
+        tagline: "Accompagnement pour votre implantation au Maroc",
+        desc:
+          "J’ai rédigé des articles pour le blog de ZAWAN, une entreprise qui accompagne les sociétés dans leur implantation au Maroc.",
+        contribution: "Contribution — Rédaction d’articles de blog",
+      },
+      run2again: {
+        category: "Automatisation e-commerce",
+        tagline:
+          "Boutique professionnelle de chaussures et vêtements d’occasion sur Vinted, en France.",
+        desc:
+          "J’ai développé avec AKKOUS une automatisation sur mesure pour Run 2 Again, une boutique Vinted Pro. L’outil traite les notifications reçues dans Gmail, centralise les achats et les ventes dans Google Sheets, génère les factures PDF et organise les bordereaux d’expédition.",
+        usage:
+          "Un tableau de bord permet de suivre les encaissements, les expéditions et les marges.",
+        detail1:
+          "Rapprochement des achats et des ventes pour calculer les marges, avec suivi des annulations et gestion des avoirs.",
+        detail2: "Intégration réalisée à partir des e-mails Vinted.",
+        button: "Voir la boutique sur Vinted",
+      },
+      mazen: {
+        category: "Création de site web · Gastronomie",
+        tagline:
+          "Une expérience culinaire entre tradition syrienne et cuisine internationale.",
+        desc:
+          "J’ai créé avec AKKOUS le site de Mazen Chef pour présenter son univers culinaire. Le site met en avant une cuisine qui associe les traditions syriennes à des influences internationales, avec des plats préparés en direct devant les convives.",
+        button: "Visiter le site",
+      },
+      biocell: {
+        category: "Création de site web · Isolation",
+        tagline: "Isolation en cellulose et étanchéité à l’air au Maroc.",
+        desc:
+          "J’ai créé avec AKKOUS le site de Biocell pour présenter ses solutions d’isolation en cellulose et d’étanchéité à l’air. Le site explique comment ces solutions, conçues pour le climat marocain, peuvent améliorer le confort thermique toute l’année et réduire la consommation d’énergie.",
+        button: "Visiter le site",
+      },
+      clients: {
+        domain: "Projets clients",
+        title: "Google Maps & catalogues",
+        category:
+          "Projets clients · Visibilité locale et création de supports",
+        tagline:
+          "Des avis clients pour renforcer la visibilité locale et des catalogues pour présenter une offre.",
+        desc:
+          "Avec AKKOUS, j’ai accompagné plusieurs entreprises dans la collecte d’avis auprès de leurs clients sur Google Maps. J’ai également conçu des catalogues imprimés et numériques pour différents projets, afin de présenter clairement leurs produits ou services et de faciliter le partage de leurs offres.",
+      },
+    },
+    timeline: {
+      kicker: "— Parcours",
+      title: "Un parcours construit<br/>sur le <em>terrain.</em>",
+      intro:
+        "De la création graphique au marketing digital, un parcours qui combine exécution, contenu et vision produit.",
+      dp: {
+        period: "Depuis 2024",
+        role: "Marketing digital & appui administratif",
+      },
+      facelook: {
+        period: "2018 — 2023",
+        role: "Réseaux sociaux, SEO & campagnes promotionnelles",
+      },
+      delta: {
+        period: "2017 — 2018",
+        role: "Création graphique",
+      },
+      raji: {
+        period: "2016",
+        role: "Conception de visuels web",
+      },
+    },
+    cta: {
+      kicker: "— Contact",
+      title: "Parlons de votre<br/><em>projet.</em>",
+      text:
+        "Un site web, une identité visuelle, une campagne ou un projet digital à structurer ? Échangeons sur vos objectifs.",
+      button: "Parlons de votre projet",
+    },
   },
 };

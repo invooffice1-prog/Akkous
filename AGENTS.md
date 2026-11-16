@@ -1,6 +1,6 @@
 # AGENTS.md — AKKOUS website
 
-Pure static marketing site. No build, no framework, no package manager, no tests/lint in-repo. `css/` (11 files) + `js/` (12 ES modules + 3 translation dictionaries) each own one responsibility; `main.js` is the only entry point.
+Pure static marketing site. No build, no framework, no package manager, no tests/lint in-repo. `css/` (12 files) + `js/` (12 ES modules + 3 translation dictionaries) each own one responsibility; `main.js` is the only entry point.
 
 ## Architecture Decisions (decided)
 - **No build / static site** — HTML, CSS, JS are served as authored. No bundler, no transpilation, no package manager in-repo.
@@ -13,7 +13,7 @@ Pure static marketing site. No build, no framework, no package manager, no tests
 ## i18n (multi-language: en / fr / es)
 Lightweight custom system. No library, no build. Rules that are easy to break:
 - `js/i18n.js` owns language state, `t('key')`, DOM application, localStorage (`akkous-language`), and the `i18n:change` CustomEvent. `initI18n()` MUST run first in `main.js` (it already does).
-- Dictionaries: `js/translations/{en,fr,es}.js`, each `export default`. The three MUST keep an exact leaf-key parity (130 leaf keys each today) — verify with a flat-key diff after editing. Missing keys fall back to EN then to the key itself + console.warn.
+- Dictionaries: `js/translations/{en,fr,es}.js`, each `export default`. The three MUST keep an exact leaf-key parity (213 leaf keys each today) — verify with a flat-key diff after editing. Missing keys fall back to EN then to the key itself + console.warn.
 - HTML text uses `data-i18n`, `data-i18n-content` (trusted markup like `<br/>`/`<em>`), `data-i18n-placeholder`, `data-i18n-title`, `data-i18n-alt`, `data-i18n-aria-label`. Set by `applyTranslations()`.
 - All user-visible JS strings use `t('key')`. For widgets that render text at runtime (char counter, validation, WhatsApp link, burger aria-label), re-render on `i18n:change` — see `modal.js`, `whatsapp.js`, `nav.js`.
 - `data-i18n` sets `textContent` (wipes child nodes) — if an element contains a child icon (`<i>`), wrap the translatable text in its own span with `data-i18n`.
@@ -48,13 +48,13 @@ ES modules fail on `file://`. Always serve: `python -m http.server <port>` from 
 ## QA (only way to verify — there is no in-repo test harness)
 Playwright v1.60 already installed at `C:\Users\onouari\AppData\Local\Temp\opencode\akkous-qa\node_modules\playwright`; run `node <script>.js` from that directory. Chrome: `C:\Program Files\Google\Chrome\Application\chrome.exe`. Use a fresh port (e.g. 8091) to avoid clashes. Validate: 0 console/page errors, no horizontal overflow, modal open/close + validation, menu, WhatsApp href, `prefers-reduced-motion`.
 
-## SEO (single production URL — www.akkous.com)
+## SEO (production domain — www.akkous.com)
 - Official/only domain: `https://www.akkous.com/`. Use it for ALL external URLs: canonical, sitemap, robots Sitemap, OG/Twitter URLs, JSON-LD. Never localhost/file:// in prod metadata.
-- The site is ONE URL with client-side i18n (Option B) — there are NO `/en /fr /es` pages. Therefore **hreflang does NOT apply** (no separate language URLs to reference). Do not add fake hreflang links.
-- Canonical is single + self-referencing: `https://www.akkous.com/`. Language switch must NOT change it (verified). Localized SEO lives in the `meta` block of each dict (`title`, `description`, `ogTitle`, `ogDescription`, `locale`, `ogLocale`, `siteName`) and is applied by `i18n.js` on load + `i18n:change`. The indexable baseline HTML stays EN (the default) — documented, accepted limitation.
-- Structured data: one `script[type="application/ld+json"][data-seo]` in `<head>` with an `@graph` of `Organization` + `WebSite` + `WebPage`. `i18n.js` localizes its name/description. NEVER invent business info (address, phone, reviews, ratings, social links) — `sameAs` is intentionally `[]`. Logo = og-image.
+- The site uses client-side i18n (Option B) — there are NO `/en /fr /es` pages. It has two URLs: `/` (home) and `/about/` (About & Projects), each with its own self-referencing canonical. Therefore **hreflang does NOT apply** (no separate language URLs to reference). Do not add fake hreflang links. Language switch must NOT change the canonical (verified). Localized SEO lives in the `meta` block of each dict (homepage) and in `parcours.meta` (portfolio page); `i18n.js` selects it from `<body data-page>` on load + `i18n:change`. The indexable baseline HTML stays EN (the default) — documented, accepted limitation.
+- Canonical is single + self-referencing per page: `https://www.akkous.com/` and `https://www.akkous.com/about/`. The legacy `/parcours/` route is a permanent static redirect to `/about/` (`parcours/index.html`).
+- Structured data: one `script[type="application/ld+json"][data-seo]` in `<head>` per page. Homepage: an `@graph` of `Organization` + `WebSite` + `WebPage`. Portfolio: `WebPage` + `Person`. `i18n.js` localizes each page's name/description. NEVER invent business info (address, phone, reviews, ratings, social links) — `sameAs` is intentionally `[]`. Logo = og-image.
 - Social image: `assets/og-image.png` (1200×630, real PNG generated via headless Chrome from `og-card.html`). Refresh by re-running the gen script in the QA dir if the brand changes.
-- Files you must keep in sync if the URL ever changes: `index.html` (canonical, OG, twitter, JSON-LD), `robots.txt`, `sitemap.xml`.
+- Files you must keep in sync if the URL ever changes: `index.html` (canonical, OG, twitter, JSON-LD), `about/index.html` (canonical, OG, twitter, JSON-LD), `parcours/index.html` (legacy redirect), `robots.txt`, `sitemap.xml`.
 
 ## Conventions
 - `prefers-reduced-motion` is handled in `responsive.css` AND in `reveal.js`, `particles.js`, `magnetic.js` — new interactive features must honor it too.

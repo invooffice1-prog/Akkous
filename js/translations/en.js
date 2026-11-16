@@ -161,6 +161,7 @@ export default {
   footer: {
     navAria: "Footer navigation",
     note: "Websites, automation, systems & digital design.",
+    parcours: "About & Projects",
   },
 
   modal: {
@@ -206,5 +207,155 @@ export default {
     tooltip: "Open WhatsApp chat",
     message:
       "Hello Akkous,\n\nI have a project in mind and I would like to discuss it with you.\n\nI am interested in a website, booking system, automation, prospecting workflow or digital design project.\n\nHere is a brief description of my project:\n\n---",
+  },
+
+  parcours: {
+    meta: {
+      title: "Youssef Onouari — Creator of AKKOUS | About & Projects",
+      description:
+        "Youssef Onouari, creator of AKKOUS, is a web developer, designer and digital marketing specialist based in Tangier, Morocco. Discover his freelance projects and career.",
+      ogTitle: "Youssef Onouari — Creator of AKKOUS | About & Projects",
+      ogDescription:
+        "Meet Youssef Onouari, creator of AKKOUS: web development, design, digital marketing, content creation and SEO from Tangier, Morocco.",
+      locale: "en",
+      ogLocale: "en_US",
+      siteName: "AKKOUS",
+    },
+    hero: {
+      kicker: "— Creator of AKKOUS",
+      titleAccent: "creator of AKKOUS.",
+      sub:
+        "Based in Tangier, Morocco, I design and build websites, visual identities, content and digital marketing systems that help businesses exist and grow online.",
+      tagsAria: "Areas of expertise",
+      tagWeb: "Web development",
+      tagDesign: "Design",
+      tagMarketing: "Digital marketing",
+      tagContent: "Content creation",
+      tagSeo: "SEO",
+      viewProjects: "View my projects",
+      contact: "Let's talk about your project",
+    },
+    profile: {
+      aria: "Youssef Onouari profile",
+      portraitAlt: "Portrait of Youssef Onouari",
+      studio: "Independent digital studio",
+      role: "Creator & founder of AKKOUS",
+      location: "Tangier, Morocco",
+      focusLine: "Web — design — digital marketing — content — SEO",
+    },
+    projects: {
+      kicker: "— Portfolio",
+      title: "A selection of my<br/><em>freelance projects.</em>",
+      intro:
+        "I am Youssef Onouari, creator of AKKOUS. Here is a selection of projects I built with AKKOUS, as well as assignments I contributed to.",
+      visit: "Visit site",
+      menuscan: {
+        tagline: "Your digital QR Code menu ready in under an hour.",
+        desc:
+          "I created MenuScan with AKKOUS to let restaurateurs put their menu online and share it via a QR code.",
+        usage:
+          "The restaurateur sends their products and prices, then receives the QR code to display in their establishment.",
+      },
+      invooffice: {
+        tagline: "Your invoicing, simplified.",
+        desc:
+          "I developed Invooffice with AKKOUS to simplify invoicing for freelancers and small businesses in Morocco.",
+        usage:
+          "The tool lets you create, export and send quotes, invoices, delivery notes and credit notes as PDFs.",
+      },
+      waapply: {
+        tagline: "CV, applications and follow-up.",
+        desc:
+          "I developed WAAPPLY with AKKOUS to help candidates organise their job search in Europe.",
+        usage:
+          "The service supports them in preparing their CV, sending applications and following up.",
+      },
+      dynamic: {
+        location: "Tamraght, Taghazout Bay, Morocco",
+        desc:
+          "I built with AKKOUS a website presenting Dynamic Loisirs’ all-inclusive surf stays in Tamraght.",
+        usage:
+          "It lets visitors discover the packages, the coaching and the surf conditions in Taghazout Bay.",
+      },
+      mouja: {
+        location: "Taghazout Bay, Morocco",
+        desc:
+          "I built with AKKOUS a website presenting Mouja Taghazout’s surf and yoga camp.",
+        usage:
+          "Visitors can discover the seaside stay, surf sessions, yoga classes and excursions.",
+      },
+      zawan: {
+        tagline: "We support you in setting up your business in Morocco",
+        desc:
+          "I wrote articles for ZAWAN’s blog, a company that supports businesses in setting up in Morocco.",
+        contribution: "Contribution — Blog article writing",
+      },
+      run2again: {
+        category: "E-commerce automation",
+        tagline:
+          "Professional second-hand shoes and clothing shop on Vinted, in France.",
+        desc:
+          "I developed with AKKOUS a custom automation for Run 2 Again, a Vinted Pro shop. The tool processes notifications received in Gmail, centralises purchases and sales in Google Sheets, generates PDF invoices and organises shipping labels.",
+        usage: "A dashboard tracks payments, shipments and margins.",
+        detail1:
+          "Matches purchases and sales to calculate margins, with tracking of cancellations and credit notes.",
+        detail2: "Automation built from Vinted e-mails.",
+        button: "View the shop on Vinted",
+      },
+      mazen: {
+        category: "Website creation · Gastronomy",
+        tagline:
+          "A culinary experience blending Syrian tradition with international cuisine.",
+        desc:
+          "I created Mazen Chef's website with AKKOUS to showcase his culinary world. The site highlights a cuisine that combines Syrian traditions with international influences, with dishes prepared live in front of guests.",
+        button: "Visit the site",
+      },
+      biocell: {
+        category: "Website creation · Insulation",
+        tagline: "Cellulose insulation and airtightness in Morocco.",
+        desc:
+          "I created Biocell's website with AKKOUS to present its cellulose insulation and airtightness solutions. The site explains how these solutions, designed for the Moroccan climate, can improve thermal comfort all year round and reduce energy consumption.",
+        button: "Visit the site",
+      },
+      clients: {
+        domain: "Client projects",
+        title: "Google Maps & catalogues",
+        category:
+          "Client projects · Local visibility and marketing materials",
+        tagline:
+          "Customer reviews to strengthen local visibility, and catalogues to present an offering.",
+        desc:
+          "With AKKOUS, I supported several businesses in collecting reviews from their customers on Google Maps. I also designed printed and digital catalogues for various projects, to clearly present their products or services and make it easier to share their offers.",
+      },
+    },
+    timeline: {
+      kicker: "— Background",
+      title: "A career built<br/>on the <em>ground.</em>",
+      intro:
+        "From graphic design to digital marketing, a path combining execution, content and product vision.",
+      dp: {
+        period: "2024 — Present",
+        role: "Digital marketing & administrative support",
+      },
+      facelook: {
+        period: "2018 — 2023",
+        role: "Social media, SEO & promotional campaigns",
+      },
+      delta: {
+        period: "2017 — 2018",
+        role: "Graphic design",
+      },
+      raji: {
+        period: "2016",
+        role: "Web visual design",
+      },
+    },
+    cta: {
+      kicker: "— Contact",
+      title: "Let's talk about<br/>your <em>project.</em>",
+      text:
+        "A website, a visual identity, a campaign or a digital project to structure? Let's discuss your goals.",
+      button: "Let's talk about your project",
+    },
   },
 };
